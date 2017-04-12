@@ -64,16 +64,15 @@ body {
         text-decoration: underline;
         cursor: pointer; }
   body #content {
-    float: left;
     padding: 2em;
+    margin: 0;
     background-color: #231b1b;
     color: white; }
     body #content nav {
       float: left;
       background-color: #271d26;
       min-width: 5%;
-      width: 16%;
-      height: 10em; }
+      width: 16%; }
       body #content nav a {
         display: block;
         color: white;
