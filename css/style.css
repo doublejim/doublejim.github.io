@@ -1,0 +1,137 @@
+@font-face {
+  font-family: "AvantGarde Md BT";
+  src: url("fonts/AvantGarde Md BT.ttf"); }
+html {
+  height: 100%; }
+
+body {
+  background-image: url("img/tile3.png");
+  text-align: center;
+  margin: auto;
+  padding: 0; }
+  body #blackspace {
+    background-color: black;
+    width: 100%;
+    height: 4em; }
+  body h1 {
+    z-index: 2;
+    position: absolute;
+    color: white;
+    font-family: Arial, serif;
+    font-weight: bold;
+    display: inline-block;
+    left: 43%;
+    top: 6.2em; }
+  body svg {
+    vertical-align: top;
+    margin-bottom: 0; }
+  body #SVG {
+    background-color: #3c1818;
+    margin-bottom: 0; }
+    body #SVG #jsonwaxtext {
+      font-family: "AvantGarde Md BT", arial, serif;
+      font-size: medium;
+      fill: #ac2424; }
+  body #rip1 {
+    position: absolute;
+    z-index: 1;
+    top: 2em;
+    right: 0;
+    height: 6em; }
+  body #rip2 {
+    position: absolute;
+    z-index: 1;
+    top: 10em;
+    right: 0;
+    height: 6em; }
+  body nav {
+    position: absolute;
+    z-index: 1;
+    top: 0em;
+    left: 0em; }
+  body #nav-container {
+    position: relative;
+    display: block;
+    margin: auto;
+    left: -45em;
+    width: 0;
+    height: 0; }
+  body #menu {
+    background-color: black;
+    color: white;
+    width: 100%;
+    display: inline-block;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    box-shadow: 0 6px 6px -2px black; }
+  body .MENU_ELEMENT, body a {
+    color: white;
+    text-decoration: none;
+    background-color: black;
+    display: inline;
+    padding: 0.5em; }
+    body .MENU_ELEMENT:hover, body a:hover {
+      color: #2fd5ff;
+      text-decoration: underline;
+      cursor: pointer; }
+  body #articles {
+    padding: 1em;
+    margin: 0;
+    background-color: #231b1b;
+    color: white; }
+    body #articles .narrow {
+      max-width: 30em; }
+    body #articles .wide {
+      max-width: 60em; }
+    body #articles article {
+      background-color: #392f2f;
+      border: 1px solid black;
+      text-align: center;
+      padding: 1em;
+      margin: auto;
+      margin-bottom: 0.5em;
+      box-shadow: 2px 2px 4px 0px black; }
+      body #articles article h3 {
+        padding-top: 0em;
+        padding-bottom: 0.5em;
+        margin: 0;
+        color: white; }
+      body #articles article h4 {
+        font-family: Arial, serif;
+        text-align: left;
+        margin: 0;
+        margin-left: 2em;
+        padding: 0;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em; }
+      body #articles article p {
+        font-family: "Calibri", serif;
+        font-size: medium;
+        margin: 0;
+        margin-left: 2em;
+        text-align: left; }
+      body #articles article .code {
+        font-family: monospace;
+        display: block;
+        text-align: left;
+        min-width: 55%;
+        max-width: 70%;
+        padding: 0.5em;
+        margin-left: 2em; }
+        body #articles article .code .source {
+          color: white;
+          background-color: #271d26; }
+        body #articles article .code .json {
+          color: white;
+          background-color: #4b3145; }
+  body footer {
+    font-size: small;
+    vertical-align: text-bottom;
+    background-color: #231b1b;
+    color: white;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: auto;
+    box-shadow: 0 2px 2px -2px black; }
+
+/*# sourceMappingURL=style.css.map */
