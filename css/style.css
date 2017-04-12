@@ -44,18 +44,6 @@ body {
     top: 10em;
     right: 0;
     height: 6em; }
-  body nav {
-    position: absolute;
-    z-index: 1;
-    top: 0em;
-    left: 0em; }
-  body #nav-container {
-    position: relative;
-    display: block;
-    margin: auto;
-    left: -45em;
-    width: 0;
-    height: 0; }
   body #menu {
     background-color: black;
     color: white;
@@ -64,39 +52,63 @@ body {
     padding-top: 1em;
     padding-bottom: 0.5em;
     box-shadow: 0 6px 6px -2px black; }
-  body .MENU_ELEMENT, body a {
-    color: white;
-    text-decoration: none;
-    background-color: black;
-    display: inline;
-    padding: 0.5em; }
-    body .MENU_ELEMENT:hover, body a:hover {
-      color: #2fd5ff;
-      text-decoration: underline;
-      cursor: pointer; }
-  body #articles {
-    padding: 1em;
-    margin: 0;
+  body .MENU_ELEMENT {
+    display: inline; }
+    body .MENU_ELEMENT a {
+      color: white;
+      text-decoration: none;
+      background-color: black;
+      padding: 0.5em; }
+      body .MENU_ELEMENT a:hover {
+        color: #2fd5ff;
+        text-decoration: underline;
+        cursor: pointer; }
+  body #content {
+    float: left;
+    padding: 2em;
     background-color: #231b1b;
     color: white; }
-    body #articles .narrow {
-      max-width: 30em; }
-    body #articles .wide {
-      max-width: 60em; }
-    body #articles article {
+    body #content nav {
+      float: left;
+      background-color: #271d26;
+      min-width: 5%;
+      width: 16%;
+      height: 10em; }
+      body #content nav a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        margin: 0; }
+        body #content nav a:hover {
+          color: #2fd5ff;
+          text-decoration: underline;
+          cursor: pointer; }
+    body #content #articles .narrow {
+      max-width: 60%; }
+    body #content #articles .wide {
+      max-width: 80%; }
+    body #content #articles article {
       background-color: #392f2f;
       border: 1px solid black;
-      text-align: center;
       padding: 1em;
       margin: auto;
       margin-bottom: 0.5em;
       box-shadow: 2px 2px 4px 0px black; }
-      body #articles article h3 {
+      body #content #articles article a {
+        color: white;
+        text-decoration: none;
+        background-color: black;
+        padding: 0.5em; }
+        body #content #articles article a:hover {
+          color: #2fd5ff;
+          text-decoration: underline;
+          cursor: pointer; }
+      body #content #articles article h3 {
         padding-top: 0em;
         padding-bottom: 0.5em;
         margin: 0;
         color: white; }
-      body #articles article h4 {
+      body #content #articles article h4 {
         font-family: Arial, serif;
         text-align: left;
         margin: 0;
@@ -104,13 +116,13 @@ body {
         padding: 0;
         margin-top: 0.5em;
         margin-bottom: 0.5em; }
-      body #articles article p {
+      body #content #articles article p {
         font-family: "Calibri", serif;
         font-size: medium;
         margin: 0;
         margin-left: 2em;
         text-align: left; }
-      body #articles article .code {
+      body #content #articles article .code {
         font-family: monospace;
         display: block;
         text-align: left;
@@ -118,10 +130,10 @@ body {
         max-width: 70%;
         padding: 0.5em;
         margin-left: 2em; }
-        body #articles article .code .source {
+        body #content #articles article .code .source {
           color: white;
           background-color: #271d26; }
-        body #articles article .code .json {
+        body #content #articles article .code .json {
           color: white;
           background-color: #4b3145; }
   body footer {
