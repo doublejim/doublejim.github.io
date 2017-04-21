@@ -253,70 +253,129 @@
   </a>
 </nav>
 <div id='articles'>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    WHAT IS IT?
+    EXAMPLES
   </h3>
   <p>
-    JsonWax is a Qt C++ class for handling JSON-documents.
-    It's an alternative to Qt's built-in class.<br><br>
-    With this, you can handle JSON-documents in a manner that directly relates to
-    the structure of the document, while not needing to think of the concepts of JSON-Arrays,
-    JSON-Objects and JSON-Values. Essentially, finding a value in a JSON-document is like
-    finding a file, where the path to the file is a sequence of strings and/or numbers.<br>
-    With this class you can write the whole "directory" in one line, which makes nested JSON-documents
-    easy to use and manipulate. I've created functions for tasks such as copying or moving data from one part of
-    the document to another, and loading the document from a file.<br><br>
-    The whole purpose is to shorten your JSON-handling code, and keep your mind on the structure of your document.<br>
-    Unfortunately this comes at the price of being slower than <em>QJsonDocument</em> (3.3 times slower) (currently I'm only comparing the parse speed).
-    <br><br><br>
-  </p>
-  <a href='http://json.org/'>
-    JSON-document format
-  </a>
-  <a href='https://github.com/doublejim/JsonWax/'>
-    JsonWax Github Repository
-  </a>
-  <p>
-    <br>
+    Here you'll see how to solve a couple of different problems.
   </p>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    HOW DOES IT WORK?
+    LOAD A FILE AND CHANGE ITS VALUES
   </h3>
   <p>
-    When loading a JSON-document, JsonWax parses it, and converts it to an internal format,
-    which allows for easy manipulation. All double, integer, bool and string values are
-    converted to their actual types (a string is stored as a QString). Therefore, loading and saving a document will not always
-    give the exact same data, because of the limitations of the types (double can only use so and so many digits; 10e2 will be converted
-    to 1000, and such things). However, this means that you can easily store and retrieve basic values
-    in/from a JSON-document.<br>
-    When converting JsonWax's internal format back to a string, the
-    JSON-Object will always have its keys sorted alphabetically, and JSON-Arrays will always
-    keep the same order.
+    Let's say we have a JSON-document as the file "in.json":
   </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp&nbsp"information": {<br>
+      &nbsp&nbsp&nbsp&nbsp"a": true,<br>
+      &nbsp&nbsp&nbsp&nbsp"b": "blob",<br>
+      &nbsp&nbsp&nbsp&nbsp"c": 15.72,<br>
+      &nbsp&nbsp&nbsp&nbsp"d": 17<br>
+      &nbsp&nbsp}<br>
+      }
+    </div>
+  </div>
+  <p>
+    We want to change all of these values, and overwrite the file with an updated one.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json ("in.json");<br>
+      json.setValue({"information","a"}, !json.value({"information","a"}).toBool());<br>
+      json.setValue({"information","b"}, json.value({"information","b"}).toString() + "Q");<br>
+      json.setValue({"information","c"}, json.value({"information","c"}).toDouble() + 1);<br>
+      json.setValue({"information","d"}, json.value({"information","d"}).toInt() + 1);<br>
+      json.save();
+    </div>
+  </div>
+  <p>
+    Note that it is recommended to use <em>.toDouble()</em> when retrieving floating point numbers, to avoid
+    creating rounding error decimals, which would be inserted in the document.
+    But you <em>could</em> use <em>.toFloat()</em> if you wanted.
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp&nbsp"information": {<br>
+      &nbsp&nbsp&nbsp&nbsp"a": false,<br>
+      &nbsp&nbsp&nbsp&nbsp"b": "blobQ",<br>
+      &nbsp&nbsp&nbsp&nbsp"c": 16.72,<br>
+      &nbsp&nbsp&nbsp&nbsp"d": 18<br>
+      &nbsp&nbsp}<br>
+      }
+    </div>
+  </div>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    KNOWN BUGS
+    SEARCH FOR VALUE, USE KEY TO FIND OTHER VALUE
   </h3>
   <p>
-    • Currently, if you use special characters, and load a file using <em>loadFile()</em>, you'll need to make sure that the file is UTF-8 encoded.
-    Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
-    results in losing them. They would be shown as "�".<br>
-    So make sure that the characters are preserved!<br>
-    • If JsonWax loads an empty Array, it will be stored as an empty Object.
+    The idea here is that we know the value, but not the key to find that value.
+    We use <em>keys()</em> to list all keys in a location. With a foreach loop
+    we check all the values under these keys, until we find the right one.
+    The key is used to retrieve a value from another place in the document.
   </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"a","a"},"narwhal");<br>
+      json.setValue({"a","b"},"zebra");<br>
+      json.setValue({"a","c"},"lion");<br>
+      json.setValue({"a","X"},"secret");<br>
+      json.setValue({"a","e"},"cat");<br>
+      json.setValue({"b","X"},"diplodocus");<br><br>
+      for (QVariant& key : json.keys({"a"}))<br>
+      &nbsp&nbspif (json.value({"a", key}) == "secret")<br>
+      &nbsp&nbsp&nbsp&nbspqDebug() &lt;&lt; json.value({"b", key}).toString();
+    </div>
+  </div>
+  <p>
+    Output:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "diplodocus"
+    </div>
+  </div>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    FUTURE WISHES
+    MANAGING KEYS
   </h3>
   <p>
-    • Serializing and de-serializing of Qt data types.<br>
-    • (at least parts of) JSON schema validation.
+    If you want to use a specific "directory" for your values,
+    but you want to be able to programmatically change that "directory".
   </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      QVariantList keys = {"a","b"};<br>
+      json.setValue( keys + QVariantList{"X"}, "hello");<br>
+      json.setValue( keys + QVariantList{"Y"}, 1325);<br>
+      qDebug() &lt;&lt; json.toString();<br>
+    </div>
+  </div>
+  <p>
+    Result:<br>
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp&nbsp"a": {<br>
+      &nbsp&nbsp&nbsp&nbsp"b" {<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"X": "hello",<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"Y": 1325<br>
+      &nbsp&nbsp&nbsp&nbsp}<br>
+      &nbsp&nbsp}<br>
+      }
+    </div>
+  </div>
 </article>
 </div></div>
 <footer></footer>

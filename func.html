@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <title>
+    JsonWax for Qt
+  </title>
+  <link href='css/style.css' rel='stylesheet'>
+</head>
+<body>
+<h1>
+  JsonWax for Qt
+</h1>
+<div id='blackspace'></div>
+<svg height='7.5em' id='SVG' viewBox='20 20 50 50' width='100%'>
+  <text fill='red' id='jsonwaxtext' transform='translate(420, -57) rotate(45) scale(1.2)'>
+    <tspan dy='1em' x='-1.1em'>
+      ------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-2.1em'>
+      ---
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-3.1em'>
+      ------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-4.1em'>
+      ----
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-5.1em'>
+      -------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-6.1em'>
+      ----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-7.1em'>
+      -----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-8.1em'>
+      --------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-9.1em'>
+      ------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-10.1em'>
+      -------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-11.1em'>
+      
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-12.1em'>
+      ---------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-13.1em'>
+      -----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-14.1em'>
+      --
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-15.1em'>
+      --------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-16.1em'>
+      ----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-17.1em'>
+      --------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-18.1em'>
+      ----
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-19.1em'>
+      ---------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-20.1em'>
+      ----
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-21.1em'>
+      --
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-22.1em'>
+      ----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-23.1em'>
+      ---------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-24.1em'>
+      -------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-25.1em'>
+      -
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-26.1em'>
+      ----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-27.1em'>
+      -----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-28.1em'>
+      ------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-29.1em'>
+      ----------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-30.1em'>
+      --------------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-31.1em'>
+      -------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-32.1em'>
+      
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-33.1em'>
+      --------
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-34.1em'>
+      -----
+      JsonWax JsonWax JsonWax
+    </tspan>
+    <tspan dy='1em' x='-35.1em'>
+      
+      JsonWax JsonWax JsonWax
+    </tspan>
+  </text>
+</svg>
+<div id='menu'>
+  <div class='MENU_ELEMENT' id='menu_element0'>
+    <a href='index.html'>
+      WHAT IS IT?
+    </a>
+  </div>
+  <div class='MENU_ELEMENT' id='menu_element1'>
+    <a href='start.html'>
+      GETTING STARTED
+    </a>
+  </div>
+  <div class='MENU_ELEMENT' id='menu_element2'>
+    <a href='examples.html'>
+      EXAMPLES
+    </a>
+  </div>
+  <div class='MENU_ELEMENT' id='menu_element3'>
+    <a href='func.html'>
+      FUNCTIONALITY
+    </a>
+  </div>
+  <div class='MENU_ELEMENT' id='menu_element4'>
+    <a href='behav.html'>
+      BEHAVIOR
+    </a>
+  </div>
+</div>
+<div id='content'>
+<nav>
+  <i>
+    functions:<br>
+  </i>
+  <a href='func.html#append'>
+    append
+  </a>
+  <a href='func.html#copy'>
+    copy
+  </a>
+  <a href='func.html#errorCode'>
+    errorCode
+  </a>
+  <a href='func.html#errorMsg'>
+    errorMsg
+  </a>
+  <a href='func.html#errorPos'>
+    errorPos
+  </a>
+  <a href='func.html#exists'>
+    exists
+  </a>
+  <a href='func.html#fromByteArray'>
+    fromByteArray
+  </a>
+  <a href='func.html#keys'>
+    keys
+  </a>
+  <a href='func.html#loadFile'>
+    loadFile
+  </a>
+  <a href='func.html#move'>
+    move
+  </a>
+  <a href='func.html#popFirst'>
+    popFirst
+  </a>
+  <a href='func.html#popLast'>
+    popLast
+  </a>
+  <a href='func.html#prepend'>
+    prepend
+  </a>
+  <a href='func.html#remove'>
+    remove
+  </a>
+  <a href='func.html#save'>
+    save
+  </a>
+  <a href='func.html#saveAs'>
+    saveAs
+  </a>
+  <a href='func.html#setNull'>
+    setNull
+  </a>
+  <a href='func.html#setValue'>
+    setValue
+  </a>
+  <a href='func.html#size'>
+    size
+  </a>
+  <a href='func.html#toString'>
+    toString
+  </a>
+  <a href='func.html#value'>
+    value
+  </a>
+</nav>
+<div id='articles'>
+<article class='wide'>
+  <h3>
+    FUNCTIONALITY
+  </h3>
+  <p>
+    Here is all that you can do in JsonWax!<br>
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='append'>
+    int append(const QVariantList& keys, const QVariant& value)
+  </h4>
+  <p>
+    Appends a value to the end of the JSON-array found at the location.
+    If there's no array at the location, the location's data is removed, and an array is created in its place, containing <em>value</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='copy'>
+    void copy(const QVariantList& keysFrom, const QVariantList& keysTo)
+  </h4>
+  <p>
+    Copies the data at a location, to another location.
+    This function cannot enter a recursive loop, since the data is first copied
+    to a temporary location, before it overwrites the data at the destination.
+  </p>
+</article>
+<article class='wide'>
+  <h4>
+    void copy(const QVariantList& keysFrom, JsonWax& jsonTo, const QVariantList& keysTo)
+  </h4>
+  <p>
+    Copies the data at a location in this JsonWax-object, to a location in another JsonWax-object.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='errorCode'>
+    int errorCode()
+  </h4>
+  <p>
+    Returns the integer code for the last parsing (0 means that it was OK).
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='errorMsg'>
+    QString errorMsg()
+  </h4>
+  <p>
+    Returns the error message for the latest <em>errorCode</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='errorPos'>
+    int errorPos()
+  </h4>
+  <p>
+    Returns the position of the last parser error (character number).
+    (I'm not sure that the position is completely accurate)<br>
+    Returns -1 if the last parsing was without error.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='exists'>
+    bool exists(const QVariantList& keys)
+  </h4>
+  <p>
+    Returns true if the location exists, and false if it doesn't. <em>exists({})</em> always returns true.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.fromByteArray("{\"A\":{\"B\":\"cow\"}}");<br>
+      qDebug() &lt;&lt; json.exists({"A"});<br>
+      qDebug() &lt;&lt; json.exists({"A","B"});<br>
+      qDebug() &lt;&lt; json.exists({"A","B","cow"});<br>
+    </div>
+  </div>
+  <p>
+    It returns:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      true<br>
+      true<br>
+      false
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h4 id='fromByteArray'>
+    bool fromByteArray(const QByteArray& bytes)
+  </h4>
+  <p>
+    Loads a JSON-document from a <em>QByteArray</em>. To load a document from a <em>QString</em> do this:<br>
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.fromByteArray( jsonString.toUtf8());
+      <br>
+    </div>
+  </div>
+  <p>
+    The function returns true if the string is a valid JSON-document, and false if it isn't.
+    See also <em>loadFile()</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='keys'>
+    QVariantList keys(const QVariantList& keys)
+  </h4>
+  <p>
+    Returns a list of all keys found at the location.
+    If the location is an array, the returned <em>QList</em> contains ints, which are the existing array positions.
+    If the location is a map, the command returns the keys in that map.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='loadFile'>
+    bool loadFile(const QString& fileName)
+  </h4>
+  <p>
+    Loads a JSON-document from file. If the function returns <em>true</em>, the file existed, and was a valid
+    JSON-document. If it returns false, the file didn't exist or the document was invalid. <em>loadFile()</em> can
+    be used when constructing an object:<br>
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json ("jsonFile.json");
+    </div>
+  </div>
+  <p>
+    If you use the above, you can't know whether the document was valid or invalid. Instead you
+    could do:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("jsonFile.json"))<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;qDebug() &lt;&lt; "valid document";<br>
+      else<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;qDebug() &lt;&lt; "invalid document";
+    </div>
+  </div>
+  <p>
+    It is tested whether the input is a relative or an absolute path, and the file is loaded if
+    it exists. So you can do both:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.loadFile("subfolder/jsonFile.json");<br>
+    </div>
+  </div>
+  <p>
+    and<br>
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.loadFile("c:/jsonFile.json");<br>
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h4 id='move'>
+    void move(const QVariantList& keysFrom, const QVariantList& keysTo)
+  </h4>
+  <p>
+    Moves data from one location to another. This function is very efficient,
+    since it just moves a pointer from A to B.
+  </p>
+</article>
+<article class='wide'>
+  <h4>
+    void move(const QVariantList& keysFrom, JsonWax& jsonTo, const QVariantList& keysTo)
+  </h4>
+  <p>
+    Moves data from one location in this JsonWax-object, to a location in another JsonWax-document.
+    This function works the same way as the other <em>move()</em>-function.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='popFirst'>
+    void popFirst(const QVariantList& keys, int removeTimes = 1)
+  </h4>
+  <p>
+    Removes the first value from the array found at the location,
+    decreasing its size by one.
+    If it's not an array nothing will happen.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='popLast'>
+    void popLast(const QVariantList& keys, int removeTimes = 1)
+  </h4>
+  <p>
+    Removes the last value from the array found at the location,
+    decreasing its size by one.
+    If it's not an array nothing will happen.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='prepend'>
+    void prepend(const QVariantList& keys, const QVariant& value)
+  </h4>
+  <p>
+    Prepends a value to the array found at the location. If it's not an array,
+    the data at the location is removed, and an array is created.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='remove'>
+    void remove(const QVariantList& keys)
+  </h4>
+  <p>
+    Removes what exists at a location, and all its sub-keys and values. If the location doesn't exist, nothing happens.
+    An empty <em>keys-list</em> removes everything. If the last key is an int, it removes
+    an element from the QList, reducing its size by 1. If array positions are important
+    to your data structure (and you insist on using ints in your <em>keys-list</em>), instead
+    of using <em>remove()</em>, you could store a null <em>QVariant</em>: <em>setValue({keys}, QVariant())</em>, which would keep
+    your list at the same size. The alternative would be to use only strings to reference locations
+    within the document.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='save'>
+    bool save(StringStyle style = Readable, bool convertToCodePoints = false)
+  </h4>
+  <p>
+    Saves the document to the file which it was loaded from. If the document wasn't loaded from a file,
+    an error will be returned, and the document won't be saved.
+    Like <em>saveAs()</em> it returns true if all bytes were written to the file, and false if they weren't.
+    See also <em>saveAs()</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='saveAs'>
+    bool saveAs(const QString& fileName, StringStyle style = Readable, bool convertToCodePoints = false, bool overwriteAllowed = true)
+  </h4>
+  <p>
+    <em>saveAs()</em> converts the document to a <em>QString</em>, and writes the document to a file.
+    If you've loaded the document from a file using <em>loadFile()</em>, you can use <em>save()</em> instead,
+    to overwrite the loaded document, without specifying a name.<br>
+    Keys within a JSON-object are always output in alphabetical order. Lists are always kept in the same order.
+    <em>style</em> can be either <em>JsonWax::Compact</em> or <em>JsonWax::Readable</em>, and determines whether the output will
+    be a JSON-document without spaces and newlines, or if it will be nicely formatted.<br>
+    <em>convertToCodePoints</em> converts unicode characters to the \uXXXX notation.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='setNull'>
+    void setNull( const QVariantList& keys)
+  </h4>
+  <p>
+    Sets the value of the location to null.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"A", "B"}, "this");<br>
+      json.setValue({"A", "C"}, "that");<br>
+      qDebug() &lt;&lt; "1:" &lt;&lt; json.toString(JsonWax::Compact);<br>
+      json.setNull({"A"});<br>
+      qDebug() &lt;&lt; "2:" &lt;&lt; json.toString(JsonWax::Compact);<br>
+    </div>
+  </div>
+  <p>
+    This returns:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      1: "{\"A\":{\"B\":\"this\",\"C\":\"that\"}}"<br>
+      2: "{\"A\":null}"
+    </div>
+  </div>
+  <p>
+    You can check whether a value is null by:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"A", "X"}, "this");<br>
+      json.setNull({"A"});<br>
+      qDebug() &lt;&lt; json.value({"A"}).isNull();<br>
+      qDebug() &lt;&lt; json.value({"B"}).isNull();<br>
+    </div>
+  </div>
+  <div class='code'>
+    <div class='json'>
+      true<br>
+      true
+    </div>
+  </div>
+  <p>
+    Notice that the existing null, and the non-existing value are <em>both</em> null.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='setValue'>
+    void setValue(const QVariantList& keys, const QVariant& value)
+  </h4>
+  <p>
+    Stores the <em>value</em> at the keys-location. This overwrites
+    anything that already exists at that location, or creates the value.<br>Example:<br>
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"this","is","my","place"}, 1565);<br>
+      json.setValue({"this","is","my","place"}, 12.535);<br>
+      json.setValue({"this","is","my","document"}, "friendship");<br>
+      json.setValue({"this","is","my","area"}, false);<br>
+      json.setValue({"this","is","my","life"}, QVariant());<br>
+      json.setValue({"this","is","my","area"}, true;
+    </div>
+  </div>
+  <p>
+    which gives the JSON-document:<br>
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"this": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"is": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"my": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"area": true,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"document": "friendship",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"life": null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"place": 12.535<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+  <p>
+    See also <em>setNull()</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='size'>
+    int size(const QVariantList& keys)
+  </h4>
+  <p>
+    Returns the number of keys found at the location, no matter if it's an Object or an Array.
+    Returns 1 if the location is a JsonValue, and returns -1 if the location doesn't exist.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"A", "B"}, "this");<br>
+      json.setValue({"C", "D"}, "thing");<br>
+      json.setValue({"E", 0}, "is");<br>
+      json.setValue({"E", 1}, "a");<br>
+      json.setValue({"E", 2}, "thing");<br>
+      json.setValue({"E", 3}, ".");<br>
+      qDebug() &lt;&lt; "object:" &lt;&lt; json.size({});<br>
+      qDebug() &lt;&lt; "array:" &lt;&lt; json.size({"E"});
+    </div>
+  </div>
+  <p>
+    Which outputs:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      object: 3<br>
+      array: 4
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h4 id='toString'>
+    QString toString(StringStyle style = Readable, bool convertToCodePoints = false)
+  </h4>
+  <p>
+    Converts all of the data in the JsonWax-object to a single <em>QString</em>.
+    See also <em>save()</em> and <em>saveAs()</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='value'>
+    QVariant value(const QVariantList& keys)
+  </h4>
+  <p>
+    Returns the <em>QVariant</em> found by following the sequence of keys. You can check if a value is null by
+    using <em>isNull()</em> on the returned value. <em>isNull()</em> returns <em>true</em> both when a value is <em>null</em> in the JSON-document,
+    and when it doesn't exist at all.<br>
+    When you use a number as a key, remember that 0 is the first element in the Array.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"alpha","beta","gamma","delta"}, "ding");<br>
+      json.setValue({"alpha","beta","gamma","echo", 4}, "location");<br>
+      qDebug() &lt;&lt; json.value({"alpha","beta","gamma","delta"}).toString();<br>
+      qDebug() &lt;&lt; json.value({"alpha","beta","gamma","echo",4}).toString();<br>
+      json.saveAs("output.json");
+    </div>
+  </div>
+  <p>
+    qDebug() outputs:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "ding"<br>
+      "location"
+    </div>
+  </div>
+  <p>
+    And "output.json" looks like this:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"alpha": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"beta": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gamma": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"delta": "ding",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"echo": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"location"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+</article>
+</div></div>
+<footer></footer>
+</body></html>

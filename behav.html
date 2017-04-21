@@ -253,70 +253,102 @@
   </a>
 </nav>
 <div id='articles'>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    WHAT IS IT?
+    JSON COMPLIANCE
   </h3>
   <p>
-    JsonWax is a Qt C++ class for handling JSON-documents.
-    It's an alternative to Qt's built-in class.<br><br>
-    With this, you can handle JSON-documents in a manner that directly relates to
-    the structure of the document, while not needing to think of the concepts of JSON-Arrays,
-    JSON-Objects and JSON-Values. Essentially, finding a value in a JSON-document is like
-    finding a file, where the path to the file is a sequence of strings and/or numbers.<br>
-    With this class you can write the whole "directory" in one line, which makes nested JSON-documents
-    easy to use and manipulate. I've created functions for tasks such as copying or moving data from one part of
-    the document to another, and loading the document from a file.<br><br>
-    The whole purpose is to shorten your JSON-handling code, and keep your mind on the structure of your document.<br>
-    Unfortunately this comes at the price of being slower than <em>QJsonDocument</em> (3.3 times slower) (currently I'm only comparing the parse speed).
-    <br><br><br>
-  </p>
-  <a href='http://json.org/'>
-    JSON-document format
-  </a>
-  <a href='https://github.com/doublejim/JsonWax/'>
-    JsonWax Github Repository
-  </a>
-  <p>
-    <br>
+    JsonWax can handle any JSON-document adhering to the JSON standard. This includes
+    handling numbers and escaped characters.
   </p>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    HOW DOES IT WORK?
+    PERFORMANCE
   </h3>
   <p>
-    When loading a JSON-document, JsonWax parses it, and converts it to an internal format,
-    which allows for easy manipulation. All double, integer, bool and string values are
-    converted to their actual types (a string is stored as a QString). Therefore, loading and saving a document will not always
-    give the exact same data, because of the limitations of the types (double can only use so and so many digits; 10e2 will be converted
-    to 1000, and such things). However, this means that you can easily store and retrieve basic values
-    in/from a JSON-document.<br>
-    When converting JsonWax's internal format back to a string, the
-    JSON-Object will always have its keys sorted alphabetically, and JSON-Arrays will always
-    keep the same order.
+    Unfortunately, JsonWax isn't as fast at internalizing a document as QJsonDocument is.
+    To test the speed, create a folder named "speedtest" in your working-directory,
+    and fill it up with .json documents.
+    Then run the line:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWaxInternals::Speedtest::runTest();
+    </div>
+  </div>
+  <p>
+    This will load all the files, and compare the time it takes to parse the files
+    (comparing only the differences between parsing from memory).
+    I ran this test with about 40 MB worth of JSON-documents, and the JsonWax internalizes documents with time spent being
+    about 330% of Qt's class. So JsonWax is slower :'-(
   </p>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    KNOWN BUGS
+    ESCAPED CHARACTERS
   </h3>
   <p>
-    • Currently, if you use special characters, and load a file using <em>loadFile()</em>, you'll need to make sure that the file is UTF-8 encoded.
-    Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
-    results in losing them. They would be shown as "�".<br>
-    So make sure that the characters are preserved!<br>
-    • If JsonWax loads an empty Array, it will be stored as an empty Object.
+    JsonWax reads UTF-8 text files and converts any unicode code points and escaped characters to
+    their respective characters. This means that <em>value(keys).toString()</em> always returns de-escaped
+    characters. When writing special characters (\,",\b,\f,\n,\r,\t) to a file, the characters are converted
+    to escaped form. UTF-8 characters aren't converted to escaped form, unless you choose so,
+    by using the <em>convertToCodePoints</em>-argument in the <em>save()</em>-functions.
   </p>
 </article>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    FUTURE WISHES
+    IN CASE OF PARSING ERRORS
   </h3>
   <p>
-    • Serializing and de-serializing of Qt data types.<br>
-    • (at least parts of) JSON schema validation.
+    If the JSON-document is invalid, JsonWax will store all values until
+    the point where the document became invalid. You can edit that document
+    as normal.
   </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.fromByteArray("[{\"A\":\"zebra\"},{\"B\":f\"koala\"},{\"C\":\"wolf\"}]");<br>
+      json.saveAs( "out.json");<br>
+    </div>
+  </div>
+  <p>
+    There is an 'f' between "B:" and "koala", which is invalid JSON. "out.json" contains only:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      [<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"A": "zebra"<br>
+      &nbsp;&nbsp;}<br>
+      ]<br>
+    </div>
+  </div>
+  <p>
+    Let's try a different scenario.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.fromByteArray("[{\"A\":\"cow\"},{\"B\":1565f},{\"C\":\"lion\"}]");<br>
+      json.saveAs( "out.json");<br>
+    </div>
+  </div>
+  <p>
+    The number ends with an invalid character 'f'. JsonWax will stop parsing, so "out.json" contains:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      [<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"A": "cow"<br>
+      &nbsp;&nbsp;},<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"B": 1565<br>
+      &nbsp;&nbsp;}<br>
+      ]
+    </div>
+  </div>
 </article>
 </div></div>
 <footer></footer>

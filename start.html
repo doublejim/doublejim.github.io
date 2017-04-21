@@ -253,69 +253,86 @@
   </a>
 </nav>
 <div id='articles'>
-<article class='narrow'>
+<article class='wide'>
   <h3>
-    WHAT IS IT?
+    GETTING STARTED
   </h3>
   <p>
-    JsonWax is a Qt C++ class for handling JSON-documents.
-    It's an alternative to Qt's built-in class.<br><br>
-    With this, you can handle JSON-documents in a manner that directly relates to
-    the structure of the document, while not needing to think of the concepts of JSON-Arrays,
-    JSON-Objects and JSON-Values. Essentially, finding a value in a JSON-document is like
-    finding a file, where the path to the file is a sequence of strings and/or numbers.<br>
-    With this class you can write the whole "directory" in one line, which makes nested JSON-documents
-    easy to use and manipulate. I've created functions for tasks such as copying or moving data from one part of
-    the document to another, and loading the document from a file.<br><br>
-    The whole purpose is to shorten your JSON-handling code, and keep your mind on the structure of your document.<br>
-    Unfortunately this comes at the price of being slower than <em>QJsonDocument</em> (3.3 times slower) (currently I'm only comparing the parse speed).
-    <br><br><br>
+    Download the newest version from the GitHub repository.
   </p>
-  <a href='http://json.org/'>
-    JSON-document format
-  </a>
   <a href='https://github.com/doublejim/JsonWax/'>
-    JsonWax Github Repository
+    Github Repository
+  </a>
+  <p>
+    You'll need 3 files:<br> JsonWax.h, JsonWaxEditor.h & JsonWaxParser.h<br>
+    Put all 3 files in your Qt-project folder. You'll only need to:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      include "JsonWax.h"<br>
+    </div>
+  </div>
+  <p>
+    in your project to use JsonWax.<br><br>
+    If you haven't enabled C++11 support in your project, you'll need to include this text in your .pro file:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      CONFIG += c++11
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h3>
+    HOW TO USE IT
+  </h3>
+  <p>
+    JsonWax is based on <em>QVariants</em> which can contain basic data types such as integer, string,
+    double, bool. To retrieve a value from a <em>QVariant</em>, you convert it <em>.toString()</em>, <em>.toInt()</em>, etc.<br>
+    A <em>QVariant</em> is stored using <em>setValue(keys, value)</em> and retrieved using <em>value(keys)</em>.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"A",4,"B",1}, "test");<br>
+      qDebug() << json.value({"A",4,"B",1}).toString();<br>
+      json.saveAs("basil.json");
+    </div>
+  </div>
+  <p>
+    Result (contents of the file "basil.json"):<br>
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp&nbsp"A": [<br>
+      &nbsp&nbsp&nbsp&nbspnull,<br>
+      &nbsp&nbsp&nbsp&nbspnull,<br>
+      &nbsp&nbsp&nbsp&nbspnull,<br>
+      &nbsp&nbsp&nbsp&nbspnull,<br>
+      &nbsp&nbsp&nbsp&nbsp{<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"B": [<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspnull,<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"test"<br>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br>
+      &nbsp&nbsp&nbsp&nbsp}<br>
+      &nbsp&nbsp]<br>
+      }
+    </div>
+  </div>
+  <p>
+    <em>QVariantList keys</em> may contain only ints (larger than -1) and <em>QStrings</em> (any UTF-8 characters), as it describes
+    a location within a JSON-document.
+    If you use an int, it specifies an element in a <em>QList</em> (where 0 is the first element).
+    If you use a <em>QString</em>, it specifies an element in a <em>QMap</em>.<br>
+    You can't access the maps and lists directly, but you can use
+    various functions to navigate your documents.<br><br>
+  </p>
+  <a href='func.html'>
+    See all available functions here.
   </a>
   <p>
     <br>
-  </p>
-</article>
-<article class='narrow'>
-  <h3>
-    HOW DOES IT WORK?
-  </h3>
-  <p>
-    When loading a JSON-document, JsonWax parses it, and converts it to an internal format,
-    which allows for easy manipulation. All double, integer, bool and string values are
-    converted to their actual types (a string is stored as a QString). Therefore, loading and saving a document will not always
-    give the exact same data, because of the limitations of the types (double can only use so and so many digits; 10e2 will be converted
-    to 1000, and such things). However, this means that you can easily store and retrieve basic values
-    in/from a JSON-document.<br>
-    When converting JsonWax's internal format back to a string, the
-    JSON-Object will always have its keys sorted alphabetically, and JSON-Arrays will always
-    keep the same order.
-  </p>
-</article>
-<article class='narrow'>
-  <h3>
-    KNOWN BUGS
-  </h3>
-  <p>
-    • Currently, if you use special characters, and load a file using <em>loadFile()</em>, you'll need to make sure that the file is UTF-8 encoded.
-    Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
-    results in losing them. They would be shown as "�".<br>
-    So make sure that the characters are preserved!<br>
-    • If JsonWax loads an empty Array, it will be stored as an empty Object.
-  </p>
-</article>
-<article class='narrow'>
-  <h3>
-    FUTURE WISHES
-  </h3>
-  <p>
-    • Serializing and de-serializing of Qt data types.<br>
-    • (at least parts of) JSON schema validation.
   </p>
 </article>
 </div></div>

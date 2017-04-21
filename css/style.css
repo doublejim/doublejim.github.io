@@ -1,6 +1,6 @@
 @font-face {
   font-family: "AvantGarde Md BT";
-  src: url("fonts/AvantGarde Md BT.ttf"); }
+  src: url("../fonts/AvantGarde Md BT.ttf"); }
 html {
   height: 100%; }
 
@@ -12,40 +12,33 @@ body {
   body #blackspace {
     background-color: black;
     width: 100%;
-    height: 4em; }
+    height: 1em; }
   body h1 {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
+    background-color: black;
     color: white;
     font-family: Arial, serif;
     font-weight: bold;
-    display: inline-block;
-    left: 43%;
-    top: 6.2em; }
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 8em;
+    top: 1.5em;
+    padding: 0.3em; }
   body svg {
     vertical-align: top;
     margin-bottom: 0; }
   body #SVG {
-    background-color: #3c1818;
+    background-color: #293b19;
     margin-bottom: 0; }
     body #SVG #jsonwaxtext {
       font-family: "AvantGarde Md BT", arial, serif;
       font-size: medium;
-      fill: #ac2424; }
-  body #rip1 {
-    position: absolute;
-    z-index: 1;
-    top: 2em;
-    right: 0;
-    height: 6em; }
-  body #rip2 {
-    position: absolute;
-    z-index: 1;
-    top: 10em;
-    right: 0;
-    height: 6em; }
+      fill: #64ac24; }
   body #menu {
     background-color: black;
+    opacity: 0.8;
     color: white;
     width: 100%;
     display: inline-block;
@@ -69,10 +62,13 @@ body {
     background-color: #231b1b;
     color: white; }
     body #content nav {
-      float: left;
+      position: fixed;
       background-color: #271d26;
-      min-width: 5%;
-      width: 16%; }
+      border: 1px solid black;
+      z-index: 2;
+      padding: 0.25em;
+      left: 1em;
+      top: 13.2em; }
       body #content nav a {
         display: block;
         color: white;
@@ -94,12 +90,16 @@ body {
       margin-bottom: 0.5em;
       box-shadow: 2px 2px 4px 0px black; }
       body #content #articles article a {
-        color: white;
+        color: black;
+        border-radius: 15px;
+        font-weight: bold;
         text-decoration: none;
-        background-color: black;
-        padding: 0.5em; }
+        background-color: #64ac24;
+        padding: 1em;
+        margin: 0.5em; }
         body #content #articles article a:hover {
-          color: #2fd5ff;
+          color: white;
+          background-color: #2fd5ff;
           text-decoration: underline;
           cursor: pointer; }
       body #content #articles article h3 {
