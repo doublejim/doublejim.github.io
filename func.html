@@ -635,12 +635,13 @@
 </article>
 <article class='wide'>
   <h4 id='value'>
-    QVariant value(const QVariantList& keys)
+    QVariant value( const QVariantList& keys, const QVariant& defaultValue = QVariant())
   </h4>
   <p>
     Returns the <em>QVariant</em> found by following the sequence of keys. You can check if a value is null by
-    using <em>isNull()</em> on the returned value. <em>isNull()</em> returns <em>true</em> both when a value is <em>null</em> in the JSON-document,
-    and when it doesn't exist at all.<br>
+    using <em>isNull()</em> on the returned value. <em>isNull()</em> returns <em>true</em> both when a value is <em>null</em> in the JSON-document, and when it doesn't exist at all.<br>
+    You can set a default value, which will be returned if the location isn't a value, or
+    the keys-list is empty.<br>
     When you use a number as a key, remember that 0 is the first element in the Array.
   </p>
   <div class='code'>
@@ -650,6 +651,7 @@
       json.setValue({"alpha","beta","gamma","echo", 4}, "location");<br>
       qDebug() &lt;&lt; json.value({"alpha","beta","gamma","delta"}).toString();<br>
       qDebug() &lt;&lt; json.value({"alpha","beta","gamma","echo",4}).toString();<br>
+      qDebug() &lt;&lt; json.value({"trout"}, "no trout").toString();<br>
       json.saveAs("output.json");
     </div>
   </div>
@@ -659,7 +661,8 @@
   <div class='code'>
     <div class='json'>
       "ding"<br>
-      "location"
+      "location"<br>
+      "no trout"
     </div>
   </div>
   <p>
