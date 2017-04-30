@@ -156,31 +156,33 @@
     </tspan>
   </text>
 </svg>
-<div id='menu'>
-  <div class='MENU_ELEMENT' id='menu_element0'>
-    <a href='index.html'>
-      WHAT IS IT?
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element1'>
-    <a href='start.html'>
-      GETTING STARTED
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element2'>
-    <a href='examples.html'>
-      EXAMPLES
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element3'>
-    <a href='func.html'>
-      FUNCTIONALITY
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element4'>
-    <a href='behav.html'>
-      BEHAVIOR
-    </a>
+<div id='menucontainer'>
+  <div id='menu'>
+    <div class='MENU_ELEMENT' id='menu_element0'>
+      <a href='index.html'>
+        WHAT IS IT?
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element1'>
+      <a href='start.html'>
+        GETTING STARTED
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element2'>
+      <a href='examples.html'>
+        EXAMPLES
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element3'>
+      <a href='func.html'>
+        FUNCTIONALITY
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element4'>
+      <a href='behav.html'>
+        BEHAVIOR
+      </a>
+    </div>
   </div>
 </div>
 <div id='content'>
@@ -269,7 +271,7 @@
   </p>
   <div class='code'>
     <div class='source'>
-      include "JsonWax.h"<br>
+      #include "JsonWax.h"<br>
     </div>
   </div>
   <p>
@@ -295,7 +297,7 @@
     <div class='source'>
       JsonWax json;<br>
       json.setValue({"A",4,"B",1}, "test");<br>
-      qDebug() << json.value({"A",4,"B",1}).toString();<br>
+      qDebug() &lt;&lt; json.value({"A",4,"B",1}).toString();<br>
       json.saveAs("basil.json");
     </div>
   </div>
@@ -305,18 +307,18 @@
   <div class='code'>
     <div class='json'>
       {<br>
-      &nbsp&nbsp"A": [<br>
-      &nbsp&nbsp&nbsp&nbspnull,<br>
-      &nbsp&nbsp&nbsp&nbspnull,<br>
-      &nbsp&nbsp&nbsp&nbspnull,<br>
-      &nbsp&nbsp&nbsp&nbspnull,<br>
-      &nbsp&nbsp&nbsp&nbsp{<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"B": [<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspnull,<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"test"<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br>
-      &nbsp&nbsp&nbsp&nbsp}<br>
-      &nbsp&nbsp]<br>
+      &nbsp;&nbsp;"A": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"B": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;]<br>
       }
     </div>
   </div>

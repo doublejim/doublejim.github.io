@@ -156,31 +156,33 @@
     </tspan>
   </text>
 </svg>
-<div id='menu'>
-  <div class='MENU_ELEMENT' id='menu_element0'>
-    <a href='index.html'>
-      WHAT IS IT?
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element1'>
-    <a href='start.html'>
-      GETTING STARTED
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element2'>
-    <a href='examples.html'>
-      EXAMPLES
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element3'>
-    <a href='func.html'>
-      FUNCTIONALITY
-    </a>
-  </div>
-  <div class='MENU_ELEMENT' id='menu_element4'>
-    <a href='behav.html'>
-      BEHAVIOR
-    </a>
+<div id='menucontainer'>
+  <div id='menu'>
+    <div class='MENU_ELEMENT' id='menu_element0'>
+      <a href='index.html'>
+        WHAT IS IT?
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element1'>
+      <a href='start.html'>
+        GETTING STARTED
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element2'>
+      <a href='examples.html'>
+        EXAMPLES
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element3'>
+      <a href='func.html'>
+        FUNCTIONALITY
+      </a>
+    </div>
+    <div class='MENU_ELEMENT' id='menu_element4'>
+      <a href='behav.html'>
+        BEHAVIOR
+      </a>
+    </div>
   </div>
 </div>
 <div id='content'>
@@ -271,12 +273,12 @@
   <div class='code'>
     <div class='json'>
       {<br>
-      &nbsp&nbsp"information": {<br>
-      &nbsp&nbsp&nbsp&nbsp"a": true,<br>
-      &nbsp&nbsp&nbsp&nbsp"b": "blob",<br>
-      &nbsp&nbsp&nbsp&nbsp"c": 15.72,<br>
-      &nbsp&nbsp&nbsp&nbsp"d": 17<br>
-      &nbsp&nbsp}<br>
+      &nbsp;&nbsp;"information": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"a": true,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"b": "blob",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"c": 15.72,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"d": 17<br>
+      &nbsp;&nbsp;}<br>
       }
     </div>
   </div>
@@ -301,12 +303,12 @@
   <div class='code'>
     <div class='json'>
       {<br>
-      &nbsp&nbsp"information": {<br>
-      &nbsp&nbsp&nbsp&nbsp"a": false,<br>
-      &nbsp&nbsp&nbsp&nbsp"b": "blobQ",<br>
-      &nbsp&nbsp&nbsp&nbsp"c": 16.72,<br>
-      &nbsp&nbsp&nbsp&nbsp"d": 18<br>
-      &nbsp&nbsp}<br>
+      &nbsp;&nbsp;"information": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"a": false,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"b": "blobQ",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"c": 16.72,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"d": 18<br>
+      &nbsp;&nbsp;}<br>
       }
     </div>
   </div>
@@ -331,8 +333,8 @@
       json.setValue({"a","e"},"cat");<br>
       json.setValue({"b","X"},"diplodocus");<br><br>
       for (QVariant& key : json.keys({"a"}))<br>
-      &nbsp&nbspif (json.value({"a", key}) == "secret")<br>
-      &nbsp&nbsp&nbsp&nbspqDebug() &lt;&lt; json.value({"b", key}).toString();
+      &nbsp;&nbsp;if (json.value({"a", key}) == "secret")<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;qDebug() &lt;&lt; json.value({"b", key}).toString();
     </div>
   </div>
   <p>
@@ -367,12 +369,12 @@
   <div class='code'>
     <div class='json'>
       {<br>
-      &nbsp&nbsp"a": {<br>
-      &nbsp&nbsp&nbsp&nbsp"b" {<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"X": "hello",<br>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"Y": 1325<br>
-      &nbsp&nbsp&nbsp&nbsp}<br>
-      &nbsp&nbsp}<br>
+      &nbsp;&nbsp;"a": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"b" {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"X": "hello",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Y": 1325<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
       }
     </div>
   </div>

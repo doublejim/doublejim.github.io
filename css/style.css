@@ -5,7 +5,7 @@ html {
   height: 100%; }
 
 body {
-  background-image: url("../img/tile3.png");
+  background-color: #160e15;
   text-align: center;
   margin: auto;
   padding: 0; }
@@ -36,15 +36,18 @@ body {
       font-family: "AvantGarde Md BT", arial, serif;
       font-size: medium;
       fill: #64ac24; }
-  body #menu {
-    background-color: black;
-    opacity: 0.8;
-    color: white;
-    width: 100%;
-    display: inline-block;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
-    box-shadow: 0 6px 6px -2px black; }
+  body #menucontainer {
+    display: block;
+    background: url("../img/tile3.png"); }
+    body #menucontainer #menu {
+      background-color: black;
+      opacity: 0.9;
+      color: white;
+      width: 100%;
+      display: inline-block;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      box-shadow: 0 6px 6px -2px black; }
   body .MENU_ELEMENT {
     display: inline; }
     body .MENU_ELEMENT a {
@@ -143,6 +146,6 @@ body {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin: auto;
-    box-shadow: 0 2px 2px -2px black; }
+    box-shadow: 0 3px 3px -2px black; }
 
 /*# sourceMappingURL=style.css.map */
