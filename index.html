@@ -306,7 +306,8 @@
     Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
     results in losing them. They would be shown as "�".<br>
     So make sure that the characters are preserved!<br>
-    • If JsonWax loads an empty Array, it will be stored as an empty Object.
+    • JsonWax is currently unable to load and store values that are only an empty object or array.
+    One effect of this problem is that: if JsonWax loads an empty Array as the whole document, it will be stored as an empty Object.
   </p>
 </article>
 <article class='narrow'>
