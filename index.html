@@ -302,13 +302,14 @@
     the structure of your document.<br><br>
     With JsonWax, you do not need to think about JSON-Arrays, JSON-Objects and
     JSON-Values. Essentially, finding a value in a JSON-document is like finding
-    a file - where the path is a sequence of strings and/or numbers, expressed as
-    a QVariantList.<br><br>
-    It is possible to write the whole "directory path" in one line, which makes
+    a file, where the path is a sequence of strings and/or numbers, which here is expressed as
+    a <em>QVariantList</em>.<br><br>
+    Instead of extracting objects from objects, you write the whole "directory path" in one line, which makes
     nested JSON-documents easy to manage.<br><br>
-    I have created easy-to-use functions for common operations such as: Loading
-    the document from a file, saving to a file, and copying/moving data from one
-    part of the document to another (or to another document!).<br><br>
+    I have created easy-to-use functions for common operations such as: Setting/retrieving/deleting values, loading/saving the document to/from file, copying/moving data from one
+    part of the document to another, and much more.<br><br>
+    Furthermore, you can even serialize QObjects and other Qt data types to JSON.
+    Both as readable strings (based on <em>QTextStream</em>), and as a Base64-encoded byte array (based on <em>QDataStream</em>).<br><br>
     Unfortunately this ease of use comes at the price of being slower than <em>QJsonDocument</em>
     (
     ~
@@ -356,7 +357,7 @@
 </article>
 <article class='narrow'>
   <h3>
-    TO BE INTEGRATED:
+    UP NEXT
   </h3>
   <p>
     • JSON schema validation.
