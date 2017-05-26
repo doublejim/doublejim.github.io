@@ -351,8 +351,7 @@
     MANAGING KEYS
   </h3>
   <p>
-    If you want to use a specific "directory" for your values,
-    but you want to be able to programmatically change that "directory".
+    If you want to keep a specific "directory" in a variable.
   </p>
   <div class='code'>
     <div class='source'>
@@ -376,6 +375,41 @@
       &nbsp;&nbsp;&nbsp;&nbsp;}<br>
       &nbsp;&nbsp;}<br>
       }
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h3>
+    READING VALUE FROM OBJECTS IN AN ARRAY
+  </h3>
+  <p>
+    We create an array of people with interests. We want to know all of their interests.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"data", 0, "name"}, "Viggo");<br>
+      json.setValue({"data", 0, "interest"}, "eating");<br>
+      json.setValue({"data", 1, "name"}, "Egon");<br>
+      json.setValue({"data", 1, "interest"}, "space travel");<br>
+      json.setValue({"data", 2, "name"}, "Linda");<br>
+      json.setValue({"data", 2, "interest"}, "motorcycles");<br><br>
+      int key = 0;<br>
+      while (json.exists({"data", key}))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "interest" &lt;&lt; key &lt;&lt; json.value({"data", key, "interest"}).toString();<br>
+      &nbsp;&nbsp;++key;<br>
+      }<br>
+    </div>
+  </div>
+  <p>
+    Result (printed to console):<br>
+  </p>
+  <div class='code'>
+    <div class='json'>
+      interest 0 "eating"<br>
+      interest 1 "space travel"<br>
+      interest 2 "motorcycles"<br>
     </div>
   </div>
 </article>
