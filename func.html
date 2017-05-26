@@ -11,6 +11,9 @@
 <h1>
   JsonWax for Qt
 </h1>
+<h2>
+  NOW WITH SERIALIZATION
+</h2>
 <div id='blackspace'></div>
 <svg height='7.5em' id='SVG' viewBox='20 20 50 50' width='100%'>
   <text fill='red' id='jsonwaxtext' transform='translate(420, -57) rotate(45) scale(1.2)'>
@@ -196,6 +199,12 @@
   <a href='func.html#copy'>
     copy
   </a>
+  <a href='func.html#deserializeBytes'>
+    deserializeBytes
+  </a>
+  <a href='func.html#deserializeJson'>
+    deserializeJson
+  </a>
   <a href='func.html#errorCode'>
     errorCode
   </a>
@@ -210,6 +219,18 @@
   </a>
   <a href='func.html#fromByteArray'>
     fromByteArray
+  </a>
+  <a href='func.html#isArray'>
+    isArray
+  </a>
+  <a href='func.html#isNullValue'>
+    isNullValue
+  </a>
+  <a href='func.html#isObject'>
+    isObject
+  </a>
+  <a href='func.html#isValue'>
+    isValue
   </a>
   <a href='func.html#keys'>
     keys
@@ -238,6 +259,18 @@
   <a href='func.html#saveAs'>
     saveAs
   </a>
+  <a href='func.html#serializeToBytes'>
+    serializeToBytes
+  </a>
+  <a href='func.html#serializeToJson'>
+    serializeToJson
+  </a>
+  <a href='func.html#setEmptyArray'>
+    setEmptyArray
+  </a>
+  <a href='func.html#setEmptyObject'>
+    setEmptyObject
+  </a>
   <a href='func.html#setNull'>
     setNull
   </a>
@@ -249,6 +282,9 @@
   </a>
   <a href='func.html#toString'>
     toString
+  </a>
+  <a href='func.html#type'>
+    type
   </a>
   <a href='func.html#value'>
     value
@@ -291,6 +327,85 @@
   </p>
 </article>
 <article class='wide'>
+  <h4 id='deserializeBytes'>
+    T deserializeBytes(const QVariantList& keys, const T defaultValue = T())
+  </h4>
+  <p>
+    Deserialize the Base64-encoded object located at <em>keys</em>.
+    Use like this:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      QColor color = deserializeBytes&lt;QColor&gt;({0,"serializedColor"});
+    </div>
+  </div>
+  <p>
+    See also serializeToBytes().
+  </p>
+</article>
+<article class='wide'>
+  <h4>
+    void deserializeBytes(T& outputHere, const QVariantList& keys)
+  </h4>
+  <p>
+    Deserialize the Base64-encoded object located at <em>keys</em>.
+    The data will be stored in the provided variable - this is useful if you are outputting
+    to a QObject, since it doesn't have a default copy constructor (and you don't need to write
+    &lt;Type&gt;).<br>
+    Use like this:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      QColor color;<br>
+      qDebug() &lt;&lt; "old color:" &lt;&lt; color;<br>
+      json.deserializeBytes( color, {0,"serializedColor"});<br>
+      qDebug() &lt;&lt; "new color:" &lt;&lt; color;
+    </div>
+  </div>
+  <p>
+    See also serializeToBytes().
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='deserializeJson'>
+    T deserializeJson(const QVariantList& keys, T defaultValue = T())
+  </h4>
+  <p>
+    Deserialize the 'serialized-to-JSON' object located at <em>keys</em>.<br>
+    Use like this:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      QDateTime datetime = json.deserializeJson&lt;QDateTime&gt;({0, "date1});
+    </div>
+  </div>
+  <p>
+    See also serializeToJson().
+  </p>
+</article>
+<article class='wide'>
+  <h4>
+    void deserializeJson(T& outputHere, const QVariantList& keys)
+  </h4>
+  <p>
+    Deserialize the 'serialized-to-JSON' object located at <em>keys</em>, and store
+    it in the provided variable.
+    Like mentioned in the second <em>deserializeBytes()</em>-function, this can be useful for
+    deserializing QObjects, since they don't have copy constructors.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      QDateTime datetime;<br>
+      qDebug() &lt;&lt; "old:" &lt;&lt; datetime;<br>
+      json.deserializeJson( datetime, {0, "date1"});<br>
+      qDebug() &lt;&lt; "new:" &lt;&lt; datetime;
+    </div>
+  </div>
+  <p>
+    See also serializeToJson().
+  </p>
+</article>
+<article class='wide'>
   <h4 id='errorCode'>
     int errorCode()
   </h4>
@@ -321,7 +436,7 @@
     bool exists(const QVariantList& keys)
   </h4>
   <p>
-    Returns true if the location exists, and false if it doesn't. <em>exists({})</em> always returns true.
+    Returns true if the location exists, and false if it doesn't. <em>exists({})</em> always returns true, since {} is the root element.
   </p>
   <div class='code'>
     <div class='source'>
@@ -360,6 +475,38 @@
   <p>
     The function returns true if the string is a valid JSON-document, and false if it isn't.
     See also <em>loadFile()</em>.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='isArray'>
+    bool isArray( const QVariantList& keys)
+  </h4>
+  <p>
+    Returns true if the location is an Array, and false if it isn't.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='isNullValue'>
+    bool isNullValue( const QVariantList& keys)
+  </h4>
+  <p>
+    Returns true if the location is a value with value "null", and false if it's anything else.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='isObject'>
+    bool isObject( const QVariantList& keys)
+  </h4>
+  <p>
+    Returns true if the location is an Object, and false if it isn't.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='isValue'>
+    bool isValue( const QVariantList& keys)
+  </h4>
+  <p>
+    Returns true if the location is a Value, and false if it isn't.
   </p>
 </article>
 <article class='wide'>
@@ -434,7 +581,6 @@
   </h4>
   <p>
     Moves data from one location in this JsonWax-object, to a location in another JsonWax-document.
-    This function works the same way as the other <em>move()</em>-function.
   </p>
 </article>
 <article class='wide'>
@@ -471,12 +617,13 @@
     void remove(const QVariantList& keys)
   </h4>
   <p>
-    Removes what exists at a location, and all its sub-keys and values. If the location doesn't exist, nothing happens.
+    Removes what exists at a location, and all of its sub-keys and values. If the location doesn't exist, nothing happens.
     An empty <em>keys-list</em> removes everything. If the last key is an int, it removes
-    an element from the QList, reducing its size by 1. If array positions are important
+    an element from the QList, reducing its size by 1.<br>
+    If array positions are important
     to your data structure (and you insist on using ints in your <em>keys-list</em>), instead
-    of using <em>remove()</em>, you could store a null <em>QVariant</em>: <em>setValue({keys}, QVariant())</em>, which would keep
-    your list at the same size. The alternative would be to use only strings to reference locations
+    of using <em>remove()</em>, you could use <em>setNull(keys)</em>, which would keep your list
+    at the same size. An alternative to this situation is to only use strings to reference locations
     within the document.
   </p>
 </article>
@@ -503,6 +650,82 @@
     <em>style</em> can be either <em>JsonWax::Compact</em> or <em>JsonWax::Readable</em>, and determines whether the output will
     be a JSON-document without spaces and newlines, or if it will be nicely formatted.<br>
     <em>convertToCodePoints</em> converts unicode characters to the \uXXXX notation.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='serializeToBytes'>
+    void serializeToBytes( const QVariantList& keys, const T& object)
+  </h4>
+  <p>
+    Serialize the given object as a Base64-encoded byte array. It becomes
+    an unreadable string which can be deserialized back to an object.
+    It would be much more efficient to write and read an object as a regular
+    byte array, and the data is unreadable, which is why many would probably call this function an abomination. You should in most cases use <em>serializeToJson()</em>,
+    since the object then becomes readable, editable strings.
+    However, <em>serializeToBytes</em> can be very useful to store fx. small pixmaps.
+    It also works for QObjects.<br><br>
+    Don't store large amounts of data with this function!
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='serializeToJson'>
+    void serializeToJson( const QVariantList& keys, const T& object)
+  </h4>
+  <p>
+    Serialize the given object as a JSON-Object, and store it at the specified location.<br><br>
+    It's currently working for these data types:<br><em>QColor, QDate, QDateTime, QLine, QLineF, QList, QMap, QObject, QPoint, QPointF, QRect, QRectF, QSize, QTime, QUrl, QVariant.</em><br><br>
+    The QMap must be JSON-compatible, so it is required to have QString as the key: QMap&lt;QString,T&gt;.<br>
+    The QLists and QMaps may be arbitrarily nested.<br>
+    Use <em>deserializeJson()</em> to deserialize back to an object.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      QDateTime datetime = QDateTime::currentDateTimeUtc();<br>
+      JsonWax json;<br>
+      json.serializeToJson({0}, datetime);<br>
+      datetime = QDateTime();<br>
+      datetime = json.deserializeJson<QDateTime>({0});<br>
+      qDebug() &lt;&lt; datetime;<br>
+      json.saveAs("SerializerTest.json");
+    </div>
+  </div>
+  <p>
+    Outputs the current UTC date and time:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      QDateTime(2017-05-26 15:59:05.131 UTC Qt::TimeSpec(UTC))
+    </div>
+  </div>
+  <p>
+    Contents of SerializerTest.json:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      [<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"date": "2017-05-26",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"time": "15:59:05.131",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"timeSpec": "1"<br>
+      &nbsp;&nbsp;}<br>
+      ]
+    </div>
+  </div>
+</article>
+<article class='wide'>
+  <h4 id='setEmptyArray'>
+    void setEmptyArray( const QVariantList& keys)
+  </h4>
+  <p>
+    Turns the location into an empty array.
+  </p>
+</article>
+<article class='wide'>
+  <h4 id='setEmptyObject'>
+    void setEmptyObject( const QVariantList& keys)
+  </h4>
+  <p>
+    Turns the location into an empty object.
   </p>
 </article>
 <article class='wide'>
@@ -597,11 +820,12 @@
 </article>
 <article class='wide'>
   <h4 id='size'>
-    int size(const QVariantList& keys)
+    int size(const QVariantList& keys = {})
   </h4>
   <p>
     Returns the number of keys found at the location, no matter if it's an Object or an Array.
     Returns 1 if the location is a JsonValue, and returns -1 if the location doesn't exist.
+    Use <em>size({})</em> or just <em>size()</em> to get the size of the root Object or Array.
   </p>
   <div class='code'>
     <div class='source'>
@@ -628,16 +852,29 @@
 </article>
 <article class='wide'>
   <h4 id='toString'>
-    QString toString(StringStyle style = Readable, bool convertToCodePoints = false)
+    QString toString(StringStyle style = Readable, bool convertToCodePoints = false, const QVariantList& keys = {})
   </h4>
   <p>
-    Converts all of the data in the JsonWax-object to a single <em>QString</em>.
+    This function converts the data in the JsonWax-object into a <em>QString</em>.
+    If <em>keys</em> isn't changed from its default, the function outputs the entire document as string.
+    With <em>keys</em> you can choose to stringify just part of the document.<br>
+    If you attempt to turn a non-existing location, or a value, into a string, this function returns "{}".
+    Therefore, the result is always a valid JSON-document.<br>
     See also <em>save()</em> and <em>saveAs()</em>.
   </p>
 </article>
 <article class='wide'>
+  <h4 id='type'>
+    Type type(const QVariantList& keys)
+  </h4>
+  <p>
+    Returns the type of the location. The Type can be either: Value, Object, Array, Null.<br>
+    An entry with value "null" is considered a Value; it's only considered Null if it doesn't exist.
+  </p>
+</article>
+<article class='wide'>
   <h4 id='value'>
-    QVariant value( const QVariantList& keys, const QVariant& defaultValue = QVariant())
+    QVariant value(const QVariantList& keys, const QVariant& defaultValue = QVariant())
   </h4>
   <p>
     Returns the <em>QVariant</em> found by following the sequence of keys. You can check if a value is null by

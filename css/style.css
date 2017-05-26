@@ -26,6 +26,20 @@ body {
     width: 8em;
     top: 1.5em;
     padding: 0.3em; }
+  body h2 {
+    z-index: 3;
+    position: absolute;
+    margin: auto;
+    color: black;
+    background-color: yellow;
+    font-family: Arial, serif;
+    font-weight: bold;
+    font-size: medium;
+    left: 16em;
+    right: 0;
+    width: 8em;
+    top: 1.4em;
+    transform: rotate(20deg); }
   body svg {
     vertical-align: top;
     margin-bottom: 0; }
@@ -65,13 +79,14 @@ body {
     background-color: #231b1b;
     color: white; }
     body #content nav {
+      width: 8%;
       position: fixed;
-      background-color: #271d26;
+      background-color: #22271d;
       border: 1px solid black;
       z-index: 2;
       padding: 0.25em;
       left: 1em;
-      top: 13.2em; }
+      top: 12.69em; }
       body #content nav a {
         display: block;
         color: white;
@@ -133,11 +148,11 @@ body {
         padding: 0.5em;
         margin-left: 2em; }
         body #content #articles article .code .source {
-          color: white;
+          color: #cbf7b9;
           background-color: #271d26; }
         body #content #articles article .code .json {
           color: white;
-          background-color: #4b3145; }
+          background-color: #6c3030; }
   body footer {
     font-size: small;
     vertical-align: text-bottom;

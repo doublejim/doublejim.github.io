@@ -11,6 +11,9 @@
 <h1>
   JsonWax for Qt
 </h1>
+<h2>
+  NOW WITH SERIALIZATION
+</h2>
 <div id='blackspace'></div>
 <svg height='7.5em' id='SVG' viewBox='20 20 50 50' width='100%'>
   <text fill='red' id='jsonwaxtext' transform='translate(420, -57) rotate(45) scale(1.2)'>
@@ -196,6 +199,12 @@
   <a href='func.html#copy'>
     copy
   </a>
+  <a href='func.html#deserializeBytes'>
+    deserializeBytes
+  </a>
+  <a href='func.html#deserializeJson'>
+    deserializeJson
+  </a>
   <a href='func.html#errorCode'>
     errorCode
   </a>
@@ -210,6 +219,18 @@
   </a>
   <a href='func.html#fromByteArray'>
     fromByteArray
+  </a>
+  <a href='func.html#isArray'>
+    isArray
+  </a>
+  <a href='func.html#isNullValue'>
+    isNullValue
+  </a>
+  <a href='func.html#isObject'>
+    isObject
+  </a>
+  <a href='func.html#isValue'>
+    isValue
   </a>
   <a href='func.html#keys'>
     keys
@@ -238,6 +259,18 @@
   <a href='func.html#saveAs'>
     saveAs
   </a>
+  <a href='func.html#serializeToBytes'>
+    serializeToBytes
+  </a>
+  <a href='func.html#serializeToJson'>
+    serializeToJson
+  </a>
+  <a href='func.html#setEmptyArray'>
+    setEmptyArray
+  </a>
+  <a href='func.html#setEmptyObject'>
+    setEmptyObject
+  </a>
   <a href='func.html#setNull'>
     setNull
   </a>
@@ -249,6 +282,9 @@
   </a>
   <a href='func.html#toString'>
     toString
+  </a>
+  <a href='func.html#type'>
+    type
   </a>
   <a href='func.html#value'>
     value
@@ -296,6 +332,27 @@
     characters. When writing special characters (\,",\b,\f,\n,\r,\t) to a file, the characters are converted
     to escaped form. UTF-8 characters aren't converted to escaped form, unless you choose so,
     by using the <em>convertToCodePoints</em>-argument in the <em>save()</em>-functions.
+  </p>
+</article>
+<article class='wide'>
+  <h3>
+    SERIALIZING OBJECTS
+  </h3>
+  <p>
+    In Qt there are at least 2 ways of serializing objects: Via <em>QTextStream</em>, which serializes
+    the object to a string, and via <em>QDataStream</em>, which serializes to a byte array.
+    In <em>QObject</em>, per default, there is support for serializing its member variables to <em>QVariants</em>.
+    Look in the Qt docs for: "Serializing Qt Data Types" to see how many types <em>QDataStream</em> can (de)serialize.<br><br>
+    In JsonWax you can use any of the three methods of (de)serializing:<br>
+    • <em>serializeToJson()</em>, which uses <em>QTextStream</em>.<br>
+    • <em>serializeToBytes()</em>, which uses <em>QDataStream</em>.<br>
+    • Having it as a member variable of a <em>QObject</em>, then serializeToJson() or serializeToBytes().<br><br>
+    I've overloaded the operators for the Q..Streams, so anything that can be serialized in a normal Qt
+    can be serialized by JsonWax.<br>
+    If you use <em>serializeToBytes()</em>, the object is converted to a Base64 byteArray, which is then stored as
+    a string in the JSON-document. This string is unreadable, and you'd get better performance and use less space if you serialized objects to byte arrays, and then stored them in a binary file, instead of a JSON-document. So, generally I don't recommend using this function.<br><br>
+    If you instead use <em>serializeToJson()</em>, the defining member values of the object are stored as readable strings in the JSON-document. This is great, and how it should be.
+    See under "serializeToJson", which Qt data types are supported.
   </p>
 </article>
 <article class='wide'>
