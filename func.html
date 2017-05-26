@@ -711,6 +711,71 @@
       ]
     </div>
   </div>
+  <p>
+    Make your class inherit from QObject, in order to make it serializable (to a limit).
+  </p>
+  <div class='code'>
+    <div class='source'>
+      class SerializerClass1 : public QObject<br>
+      {<br>
+      &nbsp;&nbsp;Q_OBJECT<br>
+      &nbsp;&nbsp;Q_PROPERTY(QString name MEMBER m_name)<br>
+      &nbsp;&nbsp;Q_PROPERTY(int superNumber MEMBER m_number)<br>
+      &nbsp;&nbsp;Q_PROPERTY(Enume1 walker MEMBER m_enume1)<br>
+      &nbsp;&nbsp;Q_PROPERTY(QDate bestDate MEMBER m_date)<br>
+      &nbsp;&nbsp;Q_PROPERTY(QColor coolColor MEMBER m_color)<br>
+      &nbsp;&nbsp;Q_PROPERTY(QImage imageAttempt MEMBER m_image)   // Can't save its data.<br>
+      &nbsp;&nbsp;Q_ENUMS(Enume1)                                  // Required to store the enum.<br>
+      public:<br>
+      &nbsp;&nbsp;SerializerClass1( QObject* parent = 0): QObject(parent){}<br>
+      &nbsp;&nbsp;enum Enume1 {Crab, Spider};<br>
+      private:<br>
+      &nbsp;&nbsp;QString m_name = "One\nWonderful Name";<br>
+      &nbsp;&nbsp;int m_number = 1900000;<br>
+      &nbsp;&nbsp;Enume1 m_enume1 = Crab;<br>
+      &nbsp;&nbsp;QDate m_date = QDate(1950,10,10);<br>
+      &nbsp;&nbsp;QColor m_color = QColor(15,16,16,255);<br>
+      &nbsp;&nbsp;QImage m_image = QImage(512,512,QImage::Format_Mono);<br>
+      };
+    </div>
+  </div>
+  <p>
+    All of the variables specified using Q_PROPERTY(T name MEMBER variable_name)
+    will be saved. The serialization in a QObject is independent from non-QObject
+    JsonWax serialization, which explains the differences in supported data types and in the serialized data.<br>
+    If, for instance, JsonWax serializes a QTime object directly, it will include ms, whereas
+    in QObject serialization it will only include hh:mm:ss.<br>
+    See below how to serialize and deserialize a SerializerClass1 object:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      SerializerClass1 object;<br>
+      JsonWax json;<br>
+      json.serializeToJson( {}, object);<br>
+      json.deserializeJson( object, {});<br>
+      json.saveAs("SerializerTest.json");
+    </div>
+  </div>
+  <p>
+    The contents of "SerializerTest.json" are:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"bestDate": "1950-10-10",<br>
+      &nbsp;&nbsp;"coolColor": "#0f1010",<br>
+      &nbsp;&nbsp;"imageAttempt": "",<br>
+      &nbsp;&nbsp;"name": "One\nWonderful Name",<br>
+      &nbsp;&nbsp;"objectName": "",<br>
+      &nbsp;&nbsp;"superNumber": "1900000",<br>
+      &nbsp;&nbsp;"walker": "0"<br>
+      }
+    </div>
+  </div>
+  <p>
+    The "objectName" is part of the <em>QObject</em>. Please don't store a variable under that name. Or under the name of any other variable.<br>
+    Even though <em>QObject</em> supports calling Properties the same name, JsonWax serialization doesn't support that.
+  </p>
 </article>
 <article class='wide'>
   <h4 id='setEmptyArray'>
