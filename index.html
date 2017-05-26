@@ -350,16 +350,15 @@
     Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
     results in losing them. They would be shown as "�".<br>
     So make sure that the characters are preserved!<br>
-    • JsonWax is currently unable to load and store values that are only an empty object or empty array.
-    One effect of this problem is that: if JsonWax loads an empty Array as the whole document, it will be stored as an empty Object.
+    • When loading an integer from a JSON-file, and using <em>value()</em> to retrieve the QVariant,
+    the type() of the QVariant value will be QMetaType::Double, and not QMetaType::Int as expected.
   </p>
 </article>
 <article class='narrow'>
   <h3>
-    WORK IN PROGRESS
+    TO BE INTEGRATED:
   </h3>
   <p>
-    • Serializing and de-serializing of Qt data types and QObjects.<br>
     • JSON schema validation.
   </p>
 </article>
