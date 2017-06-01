@@ -308,18 +308,26 @@
     Unfortunately, JsonWax isn't as fast at internalizing a document as QJsonDocument is.
     To test the speed, create a folder named "speedtest" in your working-directory,
     and fill it up with .json documents.
-    Then run the line:
+    Include JsonWaxTests.h, then run the line:
   </p>
   <div class='code'>
     <div class='source'>
-      JsonWaxInternals::Speedtest::runTest();
+      JsonWaxInternals::Tests::speedTest();
     </div>
   </div>
   <p>
     This will load all the files, and compare the time it takes to parse the files
     (comparing only the differences between parsing from memory).
     I ran this test with about 40 MB worth of JSON-documents, and the JsonWax internalizes documents with time spent being
-    about 330% of Qt's class. So JsonWax is slower :'-(
+    about 330% of Qt's class. It turns out that JsonWax is almost always slower than <em>QJsonDocument</em> :'-(
+  </p>
+</article>
+<article class='wide'>
+  <h3>
+    THREAD-SAFETY
+  </h3>
+  <p>
+    JsonWax is NOT thread-safe.
   </p>
 </article>
 <article class='wide'>
@@ -350,8 +358,8 @@
     I've overloaded the operators for the Q..Streams, so anything that can be serialized in a normal Qt
     can be serialized by JsonWax.<br>
     If you use <em>serializeToBytes()</em>, the object is converted to a Base64 byteArray, which is then stored as
-    a string in the JSON-document. This string is unreadable, and you'd get better performance and use less space if you serialized objects to byte arrays, and then stored them in a binary file, instead of a JSON-document. So, generally I don't recommend using this function.<br><br>
-    If you instead use <em>serializeToJson()</em>, the defining member values of the object are stored as readable strings in the JSON-document. This is great, and how it should be.
+    a string in the JSON-document. This string is unreadable, and you'd get better performance and use less space if you serialized objects to byte arrays, and then stored them in a binary file, instead of a JSON-document. However, it's many times faster at serializing and deserializing than <em>serializeToJson()</em>.<br><br>
+    If you use <em>serializeToJson()</em>, the defining member values of the object are stored as readable strings in the JSON-document.
     See under "serializeToJson", which Qt data types are supported.
   </p>
 </article>

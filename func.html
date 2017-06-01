@@ -660,11 +660,11 @@
     Serialize the given object as a Base64-encoded byte array. It becomes
     an unreadable string which can be deserialized back to an object.
     It would be much more efficient to write and read an object as a regular
-    byte array, and the data is unreadable, which is why many would probably call this function an abomination. You should in most cases use <em>serializeToJson()</em>,
-    since the object then becomes readable, editable strings.
-    However, <em>serializeToBytes</em> can be very useful to store fx. small pixmaps.
+    byte array, and the data is unreadable, which is why many would probably call this function an abomination. I recommend that you generally use <em>serializeToJson()</em>,
+    since the object then becomes readable, editable strings. However, serializeToBytes is much faster than serializeToJson.
+    <em>serializeToBytes</em> can be very useful to store fx. small pixmaps.
     It also works for QObjects.<br><br>
-    Don't store large amounts of data with this function!
+    Don't store large amounts of data with this function. Instead, do something more efficient.
   </p>
 </article>
 <article class='wide'>

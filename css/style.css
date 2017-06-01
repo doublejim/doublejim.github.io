@@ -79,7 +79,6 @@ body {
     background-color: #231b1b;
     color: white; }
     body #content nav {
-      width: 8%;
       position: fixed;
       background-color: #22271d;
       border: 1px solid black;
@@ -153,6 +152,11 @@ body {
         body #content #articles article .code .json {
           color: white;
           background-color: #6c3030; }
+      body #content #articles article table {
+        width: 100%;
+        background-color: #6c3030; }
+        body #content #articles article table tr th {
+          background-color: #4b2323; }
   body footer {
     font-size: small;
     vertical-align: text-bottom;
