@@ -74,7 +74,6 @@ body {
         text-decoration: underline;
         cursor: pointer; }
   body #content {
-    padding: 2em;
     margin: 0;
     background-color: #231b1b;
     color: white; }
@@ -82,10 +81,13 @@ body {
       position: fixed;
       background-color: #22271d;
       border: 1px solid black;
-      z-index: 2;
-      padding: 0.25em;
-      left: 1em;
-      top: 12.69em; }
+      top: 11.5em;
+      min-width: 10%;
+      margin-left: 0.5em;
+      padding: 0.4em;
+      left: 0em;
+      bottom: 0.5em;
+      overflow-y: auto; }
       body #content nav a {
         display: block;
         color: white;
@@ -98,7 +100,7 @@ body {
     body #content #articles .narrow {
       max-width: 60%; }
     body #content #articles .wide {
-      max-width: 80%; }
+      max-width: 70%; }
     body #content #articles article {
       background-color: #392f2f;
       border: 1px solid black;
@@ -162,8 +164,6 @@ body {
     vertical-align: text-bottom;
     background-color: #231b1b;
     color: white;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
     margin: auto;
     box-shadow: 0 3px 3px -2px black; }
 
