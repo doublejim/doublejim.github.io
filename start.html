@@ -322,49 +322,359 @@
 </article>
 <article class='wide'>
   <h3>
-    HOW TO USE IT
+    HOW TO READ VALUES
   </h3>
   <p>
-    JsonWax is based on <em>QVariants</em> which can contain basic data types such as integer, string,
-    double, bool. To retrieve a value from a <em>QVariant</em>, you convert it <em>.toString()</em>, <em>.toInt()</em>, etc.<br>
-    A <em>QVariant</em> is stored using <em>setValue(keys, value)</em> and retrieved using <em>value(keys)</em>.
+    Let's start out by creating a new JsonWax object, and save it to a file, which we shall call "test.json":
   </p>
   <div class='code'>
     <div class='source'>
       JsonWax json;<br>
-      json.setValue({"A",4,"B",1}, "test");<br>
-      qDebug() &lt;&lt; json.value({"A",4,"B",1}).toString();<br>
-      json.saveAs("basil.json");
+      json.saveAs("test.json");
     </div>
   </div>
   <p>
-    Result (contents of the file "basil.json"):<br>
+    The file "test.json" now contains:
   </p>
   <div class='code'>
     <div class='json'>
       {<br>
-      &nbsp;&nbsp;"A": [<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;null,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"B": [<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"test"<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-      &nbsp;&nbsp;]<br>
+      <br>
       }
     </div>
   </div>
   <p>
-    <em>QVariantList keys</em> may contain only ints (larger than -1) and <em>QStrings</em> (any UTF-8 characters), as it describes
-    a location within a JSON-document.
-    If you use an int, it specifies an element in a <em>QList</em> (where 0 is the first element).
-    If you use a <em>QString</em>, it specifies an element in a <em>QMap</em>.<br>
-    You can't access the maps and lists directly, but you can use
-    various functions to navigate your documents.<br><br>
+    because the JsonWax-object was empty.<br><br>
+    What if you have a JSON-document (called "input.json"), and would like to load it?
+    Your JSON-document looks like this:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"component1": "value1",<br>
+      &nbsp;&nbsp;"component2": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"detail1": "value2"<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+  <p>
+    You write:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({"component1"}).toString();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    This prints out:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "value1"
+    </div>
+  </div>
+  <p>
+    since you asked for the value of "component1", and converted it to a string.<br><br>
+    But what if you wanted the value of "detail1" inside of "component2"?
+    You write:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({"component2","detail1"}).toString();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    Which prints out:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "value2"
+    </div>
+  </div>
+  <p>
+    If you check what arguments <em>.value(...)</em> requires, it says:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      value(const QVariantList& keys, const QVariant& defaultValue = QVariant())
+    </div>
+  </div>
+  <p>
+    The arguments you gave in the two previous examples were: <em>{"component1"}</em> and <em>{"component2","detail1"}</em>. These were accepted as QVariantLists. So, whenever
+    you see a function with the argument <em>QVariantList keys</em>, it expects a list like this.<br><br>
+    But, as you might have noticed, you can have a second argument when using that function.
+    That's a default value for, if the location didn't exist, as a value, in the document.
+    For example, if you wrote:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({"component3"}, "not there").toString();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    it would print out:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "not there"
+    </div>
+  </div>
+  <p>
+    because there is no such value as <em>component3</em>. The same thing goes for:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.value({"component2"}, "not there").toString();
+    </div>
+  </div>
+  <p>
+    because the location wasn't a Value - it contained another Object.<br><br>
+    But you can also have arrays in JSON-documents (square bracket notation).<br>How would you retrieve an array element
+    with a list of keys like this?<br><br>This is your document:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      [<br>
+      &nbsp;&nbsp;"value1",<br>
+      &nbsp;&nbsp;"value2",<br>
+      &nbsp;&nbsp;[<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"value3"<br>
+      &nbsp;&nbsp;]<br>
+      ]
+    </div>
+  </div>
+  <p>
+    We want to retrieve the first value. It's done like this:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({0}).toString();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    This prints out:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "value1"
+    </div>
+  </div>
+  <p>
+    because you asked for the first element in the array (0 is first, 1 is second, etc.).<br><br>
+    You may have guessed the next step... retrieving "value3" from the document.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({2, 0}).toString();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    It outputs:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      "value3"
+    </div>
+  </div>
+  <p>
+    because you asked for the 3rd element in the root array (number 2), and then asked for
+    the 1st element in that array (number 0).<br>
+    But, what if you had both? Objects inside an Array? And the Values weren't
+    strings, but integers?
+  </p>
+  <div class='code'>
+    <div class='json'>
+      [<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"component": 15648<br>
+      &nbsp;&nbsp;},<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"component": 77<br>
+      &nbsp;&nbsp;}<br>
+      ]
+    </div>
+  </div>
+  <p>
+    You mix the numbers and strings. First, a number specifying the position in the array,
+    then the name of the object, as a string.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      if (json.loadFile("input.json"))<br>
+      {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; json.value({0, "component"}).toInt();<br>
+      } else {<br>
+      &nbsp;&nbsp;qDebug() &lt;&lt; "The document wasn't found.";<br>
+      }
+    </div>
+  </div>
+  <p>
+    And you get this:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      15648
+    </div>
+  </div>
+  <p>
+    <br>Those were the basics of reading values from JSON-data.<br><br>
+    As a final note, I need to tell you the meaning of an empty keys-list: <em>{}</em>.<br>
+    It refers to the <em>root</em> Array or Object, which is the top-level element,
+    that exists in every valid JSON-document. Since the JSON document format doesn't allow
+    that to be a value, writing <em>.value({})</em> will always return the defaultValue.<br>
+    However, you can use this whenever a function works on Arrays or Objects, fx.
+    when using the <em>.move</em> or <em>.keys</em> functions.<br>
+  </p>
+</article>
+<article class='wide'>
+  <h3>
+    HOW TO SET VALUES
+  </h3>
+  <p>
+    You've learned how to read values, but what if you wanted to create your own documents,
+    or edit existing ones?<br>
+    The function you need is <em>setValue()</em>. Our goal is to create this:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"mask1": "value1",<br>
+      &nbsp;&nbsp;"mask2": 15000,<br>
+      &nbsp;&nbsp;"mask3": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"part1": "value2",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"part2": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value3",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value4"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+  <p>
+    This can be created with just a few lines of code. Let's start with <em>mask1</em> and
+    <em>mask2</em>.
+  </p>
+  <div class='code'>
+    <div class='source'>
+      JsonWax json;<br>
+      json.setValue({"mask1"}, "value1");<br>
+      json.setValue({"mask2"}, 15000);
+    </div>
+  </div>
+  <p>
+    See, if it were a string, we used quotes, and if it were a number, we didn't.<br>
+    Now, <em>"value2"</em> is an Object within an Object. We refer to this element the same
+    way as when reading a value, with a list of keys:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.setValue({"mask3","part1"}, "value2");
+    </div>
+  </div>
+  <p>
+    And the last part are two values within an Array. So, we end the list with a number:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.setValue({"mask3","part2", 0}, "value3");<br>
+      json.setValue({"mask3","part2", 1}, "value4");
+    </div>
+  </div>
+  <p>
+    Finally, we want to save this to a file. We write:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.saveAs("result.json");
+    </div>
+  </div>
+  <p>
+    <br>And that's it! We've successfully created a JSON-document, and saved it to a file.<br>
+    You should notice that <em>setValue</em> always, automatically, overwrites any existing values,
+    or changes the document, so that your setValue-request may be fulfilled.<br><br>
+    Okay, but what would happen if the Array element number were a negative one, or not just increasing
+    the Array size by one?<br>
+    If we added one more line to the previous code:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.setValue({"mask3","part2", 5}, "value5");
+    </div>
+  </div>
+  <p>
+    We would get this document:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      {<br>
+      &nbsp;&nbsp;"mask1": "value1",<br>
+      &nbsp;&nbsp;"mask2": 15000,<br>
+      &nbsp;&nbsp;"mask3": {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"part1": "value2",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"part2": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value3",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value4",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value5"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+  <p>
+    So, it just inserts <em>null</em> values in place of the non-existing Array elements.<br><br>
+    And using a negative array element value, like this:
+  </p>
+  <div class='code'>
+    <div class='source'>
+      json.setValue({"mask3","part2", -1}, "value5");
+    </div>
+  </div>
+  <p>
+    attempts to fulfill your request as far as possible: it creates "mask3", "part2", and it turns the
+    location into an Array. But it can't save the value.<br>So you'll receive the error message:
+  </p>
+  <div class='code'>
+    <div class='json'>
+      JsonWax-insert error: invalid key.
+    </div>
+  </div>
+  <p>
+    <br><br>
   </p>
   <a href='func.html'>
     See all available functions here.
