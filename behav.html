@@ -318,9 +318,78 @@
   <p>
     This will load all the files, and compare the time it takes to parse the files
     (comparing only the differences between parsing from memory).
-    I ran this test with about 40 MB worth of JSON-documents, and the JsonWax internalizes documents with time spent being
-    about 330% of Qt's class. It turns out that JsonWax is almost always slower than <em>QJsonDocument</em> :'-(
+    I ran this test with about 40 MB worth of JSON-documents, and JsonWax internalizes documents with time spent being
+    about 4 times of Qt's class.
+    Below you can see a comparison of the relative speeds under specific circumstances. These values vary depending on the compiler and the system. Lowest value means fastest.<br><br>
   </p>
+  <table>
+    <tr>
+      <th>
+        QJsonDocument
+      </th>
+      <th>
+        Task
+      </th>
+      <th>
+        JsonWax
+      </th>
+    </tr>
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        Parse and internalize a document.
+      </td>
+      <td>
+        3.3 to 4.7
+      </td>
+    </tr>
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        Read 20,000 values from array, depth 0
+      </td>
+      <td>
+        16 to 24
+      </td>
+    </tr>
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        Read 20,000 values from array, depth 5
+      </td>
+      <td>
+        21 to 22
+      </td>
+    </tr>
+    <tr>
+      <td>
+        1 to 18
+      </td>
+      <td>
+        Change 20,000 values in array, depth 0
+      </td>
+      <td>
+        1 to 7.5
+      </td>
+    </tr>
+    <tr>
+      <td>
+        1 to 1.2
+      </td>
+      <td>
+        Change 20,000 values in array, depth 5
+      </td>
+      <td>
+        1 to 7.7
+      </td>
+    </tr>
+  </table>
 </article>
 <article class='wide'>
   <h3>
