@@ -407,8 +407,8 @@
     THREAD-SAFETY
   </h3>
   <p>
-    JsonWax is NOT thread-safe. Actually, there might even occur problems when having two, completely separate, JsonWax object
-    in each their own thread (I'll look into this, since it's really worrying).
+    JsonWax is NOT thread-safe. You can have multiple JsonWax objects simultaneously, in separate threads, but you should only interact
+    with the object from that same thread (or it'll crash).
   </p>
 </article>
 <article class='wide'>
