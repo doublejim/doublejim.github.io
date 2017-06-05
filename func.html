@@ -672,25 +672,25 @@
     void serializeToJson( const QVariantList& keys, const T& object)
   </h4>
   <p>
-    Serialize the given object as a JSON-Object, and store it at the specified location.<br><br>
+    Serialize the given object as a JSON-Object or string, and store it at the specified location.<br><br>
     It's currently working for these data types:<br><em>QColor, QDate, QDateTime, QLine, QLineF, QList, QMap, QObject, QPoint, QPointF, QRect, QRectF, QSize, QTime, QUrl, QVariant.</em><br><br>
     The QMap must be JSON-compatible, so it is required to have QString as the key: QMap&lt;QString,T&gt;.<br>
     The QLists and QMaps may be arbitrarily nested.<br>
-    Use <em>deserializeJson()</em> to deserialize back to an object.
+    Use <em>deserializeJson()</em> to deserialize back to an object.<br><br>
+    Here's an example where a QDateTime object is serialized to JSON, and then immediately deserialized.
   </p>
   <div class='code'>
     <div class='source'>
       QDateTime datetime = QDateTime::currentDateTimeUtc();<br>
       JsonWax json;<br>
       json.serializeToJson({0}, datetime);<br>
-      datetime = QDateTime();<br>
       datetime = json.deserializeJson<QDateTime>({0});<br>
       qDebug() &lt;&lt; datetime;<br>
       json.saveAs("SerializerTest.json");
     </div>
   </div>
   <p>
-    Outputs the current UTC date and time:
+    The above code outputs the current UTC date and time to console:
   </p>
   <div class='code'>
     <div class='json'>
@@ -698,7 +698,7 @@
     </div>
   </div>
   <p>
-    Contents of SerializerTest.json:
+    And here are the contents of SerializerTest.json:
   </p>
   <div class='code'>
     <div class='json'>
@@ -712,6 +712,7 @@
     </div>
   </div>
   <p>
+    That's it! With one line of code you can serialize a number of Qt data types directly to JSON.<br><br>
     Make your class inherit from QObject, in order to make it serializable (to a limit).
   </p>
   <div class='code'>
