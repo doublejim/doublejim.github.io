@@ -346,6 +346,8 @@
     Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
     results in losing them. They would be shown as "�".<br>
     So make sure that the characters are preserved!<br>
+    • I haven't at all tested JsonWax when using it simultaneously in two threads. Because of some static variables, there
+    could occur unexpected problems. I'll look into this.
   </p>
 </article>
 <article class='narrow'>

@@ -393,10 +393,22 @@
 </article>
 <article class='wide'>
   <h3>
+    WILL IT WORK ON A QT VERSION EARLIER THAN 5.7?
+  </h3>
+  <p>
+    I have run the tests on Qt 5.5, and the only problem occuring here is when converting number values to string.
+    The Qt 5.5 version of <em>QVariant</em> preferred a different conversion style, i.e. writing all possible digits of
+    a Double value, instead of only the relevant ones (so, a lot more 0's than expected).
+    Other than that, there were no problems.
+  </p>
+</article>
+<article class='wide'>
+  <h3>
     THREAD-SAFETY
   </h3>
   <p>
-    JsonWax is NOT thread-safe.
+    JsonWax is NOT thread-safe. Actually, there might even occur problems when having two, completely separate, JsonWax object
+    in each their own thread (I'll look into this, since it's really worrying).
   </p>
 </article>
 <article class='wide'>
@@ -416,7 +428,7 @@
     SERIALIZING OBJECTS
   </h3>
   <p>
-    <u>The <em>serializeToBytes()</em> function uses QDataStream, and its serialization depends on your version of Qt. So, if you want the serialized data to always be readable, independent of the version of Qt you are currently running, you should set the versions on the QDataStreams. In order to do this, you must uncomment the three
+    <u>The <em>serializeToBytes()</em> function uses QDataStream, and its serialization depends on your version of Qt. So, if you want the serialized data to always be readable, independent of what version of Qt you are currently running, you should set the versions on the QDataStreams. In order to do so, you must uncomment the three
     <em>stream.setVersion(...);</em> lines in JsonWaxSerializer.h, and choose a version number.</u><br><br>
     In Qt there are at least 2 ways of serializing objects: Via <em>QTextStream</em>, which serializes
     the object to a string, and via <em>QDataStream</em>, which serializes to a byte array.
