@@ -447,7 +447,7 @@
     </div>
   </div>
   <p>
-    because the location wasn't a Value - it contained another Object.<br><br>
+    because the location didn't contain a value - it contained another object.<br><br>
     But you can also have arrays in JSON-documents (square bracket notation).<br>How would you retrieve an array element
     with a list of keys like this?<br><br>This is your document:
   </p>
@@ -510,7 +510,7 @@
   <p>
     because you asked for the 3rd element in the root array (number 2), and then asked for
     the 1st element in that array (number 0).<br>
-    But, what if you had both? Objects inside an Array? And the Values weren't
+    But, what if you had both? Objects inside an array? And the values weren't
     strings, but integers?
   </p>
   <div class='code'>
@@ -551,10 +551,10 @@
   <p>
     <br>Those were the basics of reading values from JSON-data.<br><br>
     As a final note, I need to tell you the meaning of an empty keys-list: <em>{}</em>.<br>
-    It refers to the <em>root</em> Array or Object, which is the top-level element,
+    It refers to the <em>root</em> array or object, which is the top-level element,
     that exists in every valid JSON-document. Since the JSON document format doesn't allow
     that to be a value, writing <em>.value({})</em> will always return the defaultValue.<br>
-    However, you can use this whenever a function works on Arrays or Objects, fx.
+    However, you can use this whenever a function works on arrays or objects, fx.
     when using the <em>.move</em> or <em>.keys</em> functions.<br>
   </p>
 </article>
@@ -595,7 +595,7 @@
   </div>
   <p>
     See, if it were a string, we used quotes, and if it were a number, we didn't.<br>
-    Now, <em>"value2"</em> is an Object within an Object. We refer to this element the same
+    Now, <em>"value2"</em> is the value of an object within an object. We refer to this element the same
     way as when reading a value, with a list of keys:
   </p>
   <div class='code'>
@@ -604,7 +604,7 @@
     </div>
   </div>
   <p>
-    And the last part are two values within an Array. So, we end the list with a number:
+    And the last part are two values within an array. So, we end the list with a number:
   </p>
   <div class='code'>
     <div class='source'>
@@ -624,8 +624,8 @@
     <br>And that's it! We've successfully created a JSON-document, and saved it to a file.<br>
     You should notice that <em>setValue</em> always, automatically, overwrites any existing values,
     or changes the document, so that your setValue-request may be fulfilled.<br><br>
-    Okay, but what would happen if the Array element number were a negative one, or not just increasing
-    the Array size by one?<br>
+    Okay, but what would happen if the array element number were a negative one, or not just increasing
+    the array size by one?<br>
     If we added one more line to the previous code:
   </p>
   <div class='code'>
@@ -656,7 +656,7 @@
     </div>
   </div>
   <p>
-    So, it just inserts <em>null</em> values in place of the non-existing Array elements.<br><br>
+    So, it just inserts <em>null</em> values in place of the non-existing array elements.<br><br>
     And using a negative array element value, like this:
   </p>
   <div class='code'>
@@ -666,7 +666,7 @@
   </div>
   <p>
     attempts to fulfill your request as far as possible: it creates "mask3", "part2", and it turns the
-    location into an Array. But it can't save the value.<br>So you'll receive the error message:
+    location into an array. But it can't save the value.<br>So you'll receive the error message:
   </p>
   <div class='code'>
     <div class='json'>
