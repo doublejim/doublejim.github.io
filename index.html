@@ -345,8 +345,8 @@ KNOWN BUGS
 <p>
 • (2018-02-25) JsonWax finds the working path in its constructor. That should instead be delayed until
 the first actual attempt at saving the file, as this current configuration will cause problems if QApplication
-hasn't been initialized.
-• (2018-02-25) Fix compiling on Windows XP (since I started using thread_local this has been a problem).
+hasn't been initialized.<br>
+• (2018-02-25) Fix compiling on Windows XP (since I started using thread_local this has been a problem).<br>
 • Currently, if you use special characters, and load a file using <em>loadFile()</em>, you'll need to make sure that the file is UTF-8 encoded.
 Fx. æ, ø, å can be stored in ANSI, but expecting them to be UTF-8 characters
 results in losing them. They would be shown as "�".<br>
